@@ -1,6 +1,8 @@
+using Lekker.Kort.Interface;
+using Lekker.Kort.Repository.Context;
+using Lekker.Kort.Repository.Factory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,17 +18,6 @@ namespace Lekker.Kort
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllersWithViews();
-            // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
-        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -69,6 +60,20 @@ namespace Lekker.Kort
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
+            });
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddControllersWithViews();
+            services.AddSingleton<IKortContextFactory, KortContextFactory>();
+            services.AddTransient<IKortRepository, KortRepository>();
+
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
             });
         }
     }
