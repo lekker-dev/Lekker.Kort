@@ -44,15 +44,4 @@ namespace Lekker.Kort.Repository.Context
             modelBuilder.HasDefaultSchema(DbConstants.SchemaName);
         }
     }
-
-    public class KortContextFactory2 : IDesignTimeDbContextFactory<KortContext>
-    {
-        public KortContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<KortContext>();
-            optionsBuilder.UseSqlite("Data Source=lekker.db");
-
-            return new KortContext(optionsBuilder.Options);
-        }
-    }
 }
