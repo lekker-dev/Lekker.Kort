@@ -18,7 +18,7 @@ namespace Lekker.Kort.Controllers
         }
 
         [HttpPost("{url}")]
-        public async Task<ActionResult<ShortUrlResponse>> AddShortUriAsync([Required, FromRoute] string url, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<ShortUrlResponse>> AddShortUrlAsync([Required, FromRoute] string url, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(url))
             {
