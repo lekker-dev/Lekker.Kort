@@ -7,12 +7,12 @@ using System;
 
 namespace Lekker.Kort.Repository.Factory
 {
-    public class KortContextFactory : IKortContextFactory
+    public class ShortUriContextFactory : IShortUriContextFactory
     {
         private readonly string _connectionString;
         private bool _migrationsRan;
 
-        public KortContextFactory(IConfiguration configuration)
+        public ShortUriContextFactory(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString(DbConstants.AppSettings.ConnectionStrings.DB);
             if (_connectionString == null)
@@ -23,7 +23,7 @@ namespace Lekker.Kort.Repository.Factory
 
         public DbContext CreateDbContext()
         {
-            var context = new KortContext(_connectionString);
+            var context = new ShortUriContext(_connectionString);
 
             if (!_migrationsRan)
             {

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lekker.Kort.Repository.Migrations
 {
-    [DbContext(typeof(KortContext))]
+    [DbContext(typeof(ShortUriContext))]
     [Migration("20201005185949_InitialCreate")]
     partial class InitialCreate
     {
