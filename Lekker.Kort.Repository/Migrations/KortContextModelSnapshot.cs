@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Lekker.Kort.Repository.Migrations
 {
-    [DbContext(typeof(KortContext))]
+    [DbContext(typeof(ShortUriContext))]
     partial class KortContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

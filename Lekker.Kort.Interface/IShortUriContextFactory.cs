@@ -2,7 +2,7 @@
 
 namespace Lekker.Kort.Interface
 {
-    public interface IKortContextFactory
+    public interface IShortUriContextFactory
     {
         DbContext CreateDbContext();
     }

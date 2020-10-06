@@ -1,20 +1,22 @@
 ﻿using Lekker.Kort.Repository.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
+using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Lekker.Kort.Repository.Context
 {
-    public class KortContext : DbContext
+    public class ShortUriContext : DbContext
     {
         private readonly string _connectionString;
 
-        public KortContext(string connectionString)
+        public ShortUriContext(string connectionString)
         {
             _connectionString = connectionString;
         }
 
-        public KortContext(DbContextOptions<KortContext> options) : base(options)
+        public ShortUriContext(DbContextOptions<ShortUriContext> options) : base(options)
         {
         }
 
@@ -28,6 +30,25 @@ namespace Lekker.Kort.Repository.Context
             }
         }
 
+        internal async Task<ShortenedUrl> AddShortUrlAsync(string url, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var shortenedUrl = new ShortenedUrl(Guid.NewGuid().ToString(), url);
+
+            await ShortenedUrls.AddAsync(shortenedUrl, cancellationToken).ConfigureAwait(false);
+            await SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+
+            return shortenedUrl;
+        }
+
+        internal async Task<ShortenedUrl> GetOriginalUrl(string key, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            return await ShortenedUrls.FirstAsync(s => s.Key == key, cancellationToken).ConfigureAwait(false);
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -38,7 +59,6 @@ namespace Lekker.Kort.Repository.Context
                 });
             }
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema(DbConstants.SchemaName);
