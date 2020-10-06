@@ -13,7 +13,7 @@ namespace Lekker.Kort.Controllers
             _kortRepo = kortRepository ?? throw new ArgumentNullException(nameof(kortRepository));
         }
 
-        protected IShortUriRepository GetKortRepo()
+        protected IShortUriRepository GetShortenedUrlRepository()
         {
             _kortRepo.SetContext();
             return _kortRepo;

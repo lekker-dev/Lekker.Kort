@@ -25,7 +25,7 @@ namespace Lekker.Kort.Controllers
                 return BadRequest("Invalid URL");
             }
 
-            var shortUrl = await GetKortRepo()
+            var shortUrl = await GetShortenedUrlRepository()
                                     .AddShortenedUrl(System.Uri.UnescapeDataString(url), cancellationToken)
                                     .ConfigureAwait(false);
 
@@ -40,7 +40,7 @@ namespace Lekker.Kort.Controllers
                 return BadRequest("Invalid URL");
             }
 
-            var originalUrl = await GetKortRepo()
+            var originalUrl = await GetShortenedUrlRepository()
                                         .GetOriginalUrl(shortUrl, cancellationToken)
                                         .ConfigureAwait(false);
 
