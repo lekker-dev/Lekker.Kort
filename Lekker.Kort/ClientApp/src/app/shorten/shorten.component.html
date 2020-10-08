@@ -1,14 +1,14 @@
-<div class="container">
-  <h1 class="title-label">Lekker.Kort:</h1>
-  <mat-divider></mat-divider>
-
-  <mat-form-field appearance="outline" class="shorten-input">
-    <mat-label>URL to shorten</mat-label>
-    <input matInput #inputUrl />
-  </mat-form-field>
-  <button mat-raised-button color="primary" class="shorten-button" (click)="getShortUrl(inputUrl.value)">Shorten</button>
-
-  <mat-divider></mat-divider>
-
-  <p aria-live="polite">Url Key: <strong>{{ shortenedUrl }}</strong></p>
+<div class="shorten-container">
+  <div class="child">
+    <h1 class="title-label" color="accent">Lekker.Kort:</h1>
+    
+    <mat-form-field appearance="fill" class="shorten-input" color="accent" >
+      <mat-label>URL to shorten</mat-label>
+      <input matInput #inputUrl />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="shorten-button" (click)="getShortUrl(inputUrl.value)">Shorten</button>
+    
+    <p class="shortened-url" aria-live="polite"><strong>{{ shortenedUrl }}</strong></p>
+  </div>
 </div>

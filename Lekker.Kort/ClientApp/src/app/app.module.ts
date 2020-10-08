@@ -10,14 +10,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { ShortenComponent } from './shorten/shorten.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AngularMaterialModule } from './angular-material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
     ShortenComponent,
   ],
   imports: [
@@ -31,7 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatButtonModule,
     MatDividerModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    AngularMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

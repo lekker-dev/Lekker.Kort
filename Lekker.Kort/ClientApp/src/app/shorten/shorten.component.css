@@ -1,6 +1,6 @@
-.container {
-  margin: 0 auto;
-  padding: 20px;
+.child
+{
+  padding-top: 15%;
 }
 
 .title-label{
@@ -12,7 +12,12 @@
 }
 
 .shorten-button {
-  width: 20% !important;
+  width: 100% !important;
   height: 55px !important;
   padding: 5px !important
+}
+
+.shortened-url {
+  padding-top: 25px;
+  text-align: center;
 }

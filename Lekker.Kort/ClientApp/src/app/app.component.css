@@ -1,0 +1,12 @@
+.container
+{
+    height: 100%;
+    width: 100%;
+}
+
+
+.photo-credit {
+    position:absolute;
+    bottom:0;
+    right:0;
+}
