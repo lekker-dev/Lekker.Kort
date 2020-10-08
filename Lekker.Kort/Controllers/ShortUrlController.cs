@@ -1,11 +1,11 @@
 ﻿using Lekker.Kort.Interface;
 using Lekker.Kort.Models;
+using Lekker.Kort.Models.Request;
 using Lekker.Kort.Models.Response;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace Lekker.Kort.Controllers
 {
@@ -17,31 +17,31 @@ namespace Lekker.Kort.Controllers
         {
         }
 
-        [HttpPost("{url}")]
-        public async Task<ActionResult<ShortUrlResponse>> AddShortUrlAsync([Required, FromRoute] string url, CancellationToken cancellationToken = default)
+        [HttpPost]
+        public async Task<ActionResult<ShortUrlResponse>> AddShortUrlAsync([Required] ShortenUrlRequest url, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(url))
+            if (string.IsNullOrWhiteSpace(url.Url))
             {
                 return BadRequest("Invalid URL");
             }
 
             var shortUrl = await GetShortenedUrlRepository()
-                                    .AddShortenedUrl(System.Uri.UnescapeDataString(url), cancellationToken)
+                                    .AddShortenedUrl(System.Uri.UnescapeDataString(url.Url), cancellationToken)
                                     .ConfigureAwait(false);
 
             return Ok(shortUrl.ToShortUrlResponse());
         }
 
-        [HttpGet("{shortUrl}")]
-        public async Task<ActionResult<OriginalUrlResponse>> GetOriginalUrl([Required, FromRoute] string shortUrl, CancellationToken cancellationToken = default)
+        [HttpGet]
+        public async Task<ActionResult<OriginalUrlResponse>> GetOriginalUrl([Required] OriginalUrlRequest url, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(shortUrl))
+            if (string.IsNullOrWhiteSpace(url.ShortUrl))
             {
                 return BadRequest("Invalid URL");
             }
 
             var originalUrl = await GetShortenedUrlRepository()
-                                        .GetOriginalUrl(shortUrl, cancellationToken)
+                                        .GetOriginalUrl(url.ShortUrl, cancellationToken)
                                         .ConfigureAwait(false);
 
             return Ok(originalUrl.ToOriginalUrlResponse());
