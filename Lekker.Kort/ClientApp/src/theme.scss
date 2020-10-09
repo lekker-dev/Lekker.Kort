@@ -30,6 +30,6 @@ $my-custom-warn: mat-palette($warn, A200, A400, A700);
 $my-custom-theme: mat-light-theme($my-custom-primary, $my-custom-accent);
 
 // Convert to this => mat-dark-theme()
-//$my-custom-theme: mat-dark-theme($my-custom-primary, $my-custom-accent);
+// $my-custom-theme: mat-dark-theme($my-custom-primary, $my-custom-accent);
 
 @include angular-material-theme($my-custom-theme);
