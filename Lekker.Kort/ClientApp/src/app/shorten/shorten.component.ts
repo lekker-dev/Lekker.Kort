@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-shorten',
-  templateUrl: './shorten.component.html'
+  templateUrl: './shorten.component.html',
+  styleUrls: ['./shorten.component.css']
 })
 export class ShortenComponent {
 
