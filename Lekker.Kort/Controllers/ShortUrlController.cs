@@ -2,6 +2,7 @@
 using Lekker.Kort.Models;
 using Lekker.Kort.Models.Request;
 using Lekker.Kort.Models.Response;
+using Lekker.Kort.Repository.Context;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
@@ -13,7 +14,7 @@ namespace Lekker.Kort.Controllers
     [Route("[controller]")]
     public class ShortUrlController : KortControllerBase
     {
-        public ShortUrlController(IShortUriRepository kortRepository) : base(kortRepository)
+        public ShortUrlController(IShortUrlRepository kortRepository) : base(kortRepository)
         {
         }
 
@@ -32,19 +33,19 @@ namespace Lekker.Kort.Controllers
             return Ok(shortUrl.ToShortUrlResponse());
         }
 
-        [HttpGet]
-        public async Task<ActionResult<OriginalUrlResponse>> GetOriginalUrl([Required] OriginalUrlRequest url, CancellationToken cancellationToken = default)
-        {
-            if (string.IsNullOrWhiteSpace(url.ShortUrl))
-            {
-                return BadRequest("Invalid URL");
-            }
+        //[HttpGet("{shortUrl}")]
+        //public async Task<ActionResult<OriginalUrlResponse>> GetOriginalUrl([Required, FromRoute] string shortUrl, CancellationToken cancellationToken = default)
+        //{
+        //    if (string.IsNullOrWhiteSpace(shortUrl))
+        //    {
+        //        return BadRequest("Invalid URL");
+        //    }
 
-            var originalUrl = await GetShortenedUrlRepository()
-                                        .GetOriginalUrl(url.ShortUrl, cancellationToken)
-                                        .ConfigureAwait(false);
+        //    var originalUrl = await GetShortenedUrlRepository()
+        //                                .GetOriginalUrl(shortUrl, cancellationToken)
+        //                                .ConfigureAwait(false);
 
-            return Ok(originalUrl.ToOriginalUrlResponse());
-        }
+        //    return Ok(originalUrl.ToOriginalUrlResponse());
+        //}
     }
 }

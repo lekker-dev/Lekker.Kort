@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Lekker.Kort.Interface
 {
-    public interface IShortUriRepository
+    public interface IShortUrlRepository
     {
         Task<ShortUrlResponseDto> AddShortenedUrl(string uri, CancellationToken cancellationToken);
 

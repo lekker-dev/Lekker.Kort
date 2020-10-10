@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace Lekker.Kort.Repository.Context
 {
-    public class ShortUriRepository : IShortUriRepository
+    public class ShortUrlRepository : IShortUrlRepository
     {
-        protected ShortUriContext _kortContext;
+        protected ShortUrlContext _kortContext;
 
-        private readonly IShortUriContextFactory _contextFactory;
+        private readonly IShortUrlContextFactory _contextFactory;
 
-        public ShortUriRepository(IShortUriContextFactory contextFactory)
+        public ShortUrlRepository(IShortUrlContextFactory contextFactory)
         {
             _contextFactory = contextFactory;
         }
@@ -28,7 +28,7 @@ namespace Lekker.Kort.Repository.Context
         public void SetContext()
         {
             if (_kortContext == null)
-                _kortContext = (ShortUriContext)_contextFactory.CreateDbContext();
+                _kortContext = (ShortUrlContext)_contextFactory.CreateDbContext();
         }
 
         public async Task<ShortUrlResponseDto> AddShortenedUrl(string uri, CancellationToken cancellationToken)

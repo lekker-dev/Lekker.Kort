@@ -4,16 +4,19 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { AngularMaterialModule } from './angular-material.module';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { ShortenComponent } from './shorten/shorten.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AngularMaterialModule } from './angular-material.module';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { AngularMaterialModule } from './angular-material.module';
     MatDividerModule,
     MatInputModule,
     MatFormFieldModule,
-    AngularMaterialModule
+    MatIconModule,
+    AngularMaterialModule,
+    ClipboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

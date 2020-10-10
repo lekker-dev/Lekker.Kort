@@ -7,7 +7,10 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Extensions.Logging;
 using System;
 
 namespace Lekker.Kort
@@ -76,8 +79,11 @@ namespace Lekker.Kort
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<IShortUriContextFactory, ShortUriContextFactory>();
-            services.AddTransient<IShortUriRepository, ShortUriRepository>();
+            services.AddSingleton<IShortUrlContextFactory, ShortUrlContextFactory>();
+            services.AddTransient<IShortUrlRepository, ShortUrlRepository>();
+
+            services.AddSingleton(Configuration);
+            services.AddSingleton<ILoggerFactory, SerilogLoggerFactory>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -100,6 +106,8 @@ namespace Lekker.Kort
                     },
                 });
             });
+
+            Log.Information("Ready");
         }
     }
 }
