@@ -6,14 +6,14 @@ namespace Lekker.Kort.Controllers
 {
     public class KortControllerBase : ControllerBase
     {
-        private readonly IShortUriRepository _kortRepo;
+        private readonly IShortUrlRepository _kortRepo;
 
-        public KortControllerBase(IShortUriRepository kortRepository)
+        public KortControllerBase(IShortUrlRepository kortRepository)
         {
             _kortRepo = kortRepository ?? throw new ArgumentNullException(nameof(kortRepository));
         }
 
-        protected IShortUriRepository GetShortenedUrlRepository()
+        protected IShortUrlRepository GetShortenedUrlRepository()
         {
             _kortRepo.SetContext();
             return _kortRepo;

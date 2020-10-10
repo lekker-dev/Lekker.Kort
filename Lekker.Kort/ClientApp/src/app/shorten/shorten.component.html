@@ -1,14 +1,22 @@
 <div class="shorten-container">
   <div class="child">
     <h1 class="title-label" color="accent">Lekker.Kort:</h1>
-    
-    <mat-form-field appearance="fill" class="shorten-input" color="accent" >
+
+    <mat-form-field appearance="fill" class="shorten-input" color="accent">
       <mat-label>URL to shorten</mat-label>
       <input matInput #inputUrl />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+
+      <button mat-raised-button color="primary" class="shorten-button" (click)="getShortUrl(inputUrl.value)">Shorten</button>
     </mat-form-field>
-    <button mat-raised-button color="primary" class="shorten-button" (click)="getShortUrl(inputUrl.value)">Shorten</button>
-    
-    <p class="shortened-url" aria-live="polite"><strong>{{ shortenedUrl }}</strong></p>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field appearance="fill" class="shorten-input" color="accent" *ngIf="showShortened">
+      <mat-label>Short URL</mat-label>
+      <input matInput type="text" #inputTarget aria-live="polite" value="{{ shortenedUrl }}" readonly />
+      <button mat-icon-button matSuffix [attr.aria-label]="'Copy URL to clipboard'" [ngxClipboard]="inputTarget" [attr.aria-pressed]="hide">
+        <mat-icon svgIcon="copy"></mat-icon>
+      </button>
+    </mat-form-field>
   </div>
 </div>

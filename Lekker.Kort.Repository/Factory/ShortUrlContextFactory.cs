@@ -1,18 +1,17 @@
 ﻿using Lekker.Kort.Interface;
 using Lekker.Kort.Repository.Context;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System;
 
 namespace Lekker.Kort.Repository.Factory
 {
-    public class ShortUriContextFactory : IShortUriContextFactory
+    public class ShortUrlContextFactory : IShortUrlContextFactory
     {
         private readonly string _connectionString;
         private bool _migrationsRan;
 
-        public ShortUriContextFactory(IConfiguration configuration)
+        public ShortUrlContextFactory(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString(DbConstants.AppSettings.ConnectionStrings.DB);
             if (_connectionString == null)
@@ -23,7 +22,7 @@ namespace Lekker.Kort.Repository.Factory
 
         public DbContext CreateDbContext()
         {
-            var context = new ShortUriContext(_connectionString);
+            var context = new ShortUrlContext(_connectionString);
 
             if (!_migrationsRan)
             {

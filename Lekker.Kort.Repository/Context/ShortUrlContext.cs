@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Lekker.Kort.Repository.Context
 {
-    public class ShortUriContext : DbContext
+    public class ShortUrlContext : DbContext
     {
         private readonly string _connectionString;
 
-        public ShortUriContext(string connectionString)
+        public ShortUrlContext(string connectionString)
         {
             _connectionString = connectionString;
         }
 
-        public ShortUriContext(DbContextOptions<ShortUriContext> options) : base(options)
+        public ShortUrlContext(DbContextOptions<ShortUrlContext> options) : base(options)
         {
         }
 
