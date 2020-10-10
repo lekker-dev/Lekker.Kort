@@ -1,6 +1,6 @@
 ﻿namespace Lekker.Kort.Interface.DTO
 {
-    public class ShortUrlResponseDto
+    public class ModifiedUrlResponse
     {
         public string ShortUrl { get; set; }
     }

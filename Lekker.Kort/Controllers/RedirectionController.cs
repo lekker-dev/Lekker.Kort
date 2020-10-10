@@ -1,8 +1,5 @@
 ﻿using Lekker.Kort.Interface;
 using Lekker.Kort.Models;
-using Lekker.Kort.Models.Request;
-using Lekker.Kort.Models.Response;
-using Lekker.Kort.Repository.Context;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
@@ -14,24 +11,23 @@ namespace Lekker.Kort.Controllers
     [Route("r")]
     public class RedirectionController : KortControllerBase
     {
-        public RedirectionController(IShortUrlRepository kortRepository) : base(kortRepository)
+        public RedirectionController(IModifiedUrlRepository kortRepository) : base(kortRepository)
         {
         }
 
-
-        [HttpGet("{shortUrl}")]
-        public async Task<ActionResult> GetOriginalUrl([Required, FromRoute] string shortUrl, CancellationToken cancellationToken = default)
+        [HttpGet("{modifiedUrl}")]
+        public async Task<ActionResult> RedirectTo([Required, FromRoute] string modifiedUrl, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(shortUrl))
+            if (string.IsNullOrWhiteSpace(modifiedUrl))
             {
                 return BadRequest("Invalid URL");
             }
 
             var originalUrl = await GetShortenedUrlRepository()
-                                        .GetOriginalUrl(shortUrl, cancellationToken)
+                                        .GetOriginalUrl(modifiedUrl, cancellationToken)
                                         .ConfigureAwait(false);
 
-            return Redirect(originalUrl.ToOriginalUrlResponse().OriginalUrl);
+            return Redirect(originalUrl.OriginalUrl);
         }
     }
 }

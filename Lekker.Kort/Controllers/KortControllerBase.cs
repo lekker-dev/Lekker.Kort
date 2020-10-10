@@ -4,16 +4,16 @@ using System;
 
 namespace Lekker.Kort.Controllers
 {
-    public class KortControllerBase : ControllerBase
+    public abstract class KortControllerBase : ControllerBase
     {
-        private readonly IShortUrlRepository _kortRepo;
+        private readonly IModifiedUrlRepository _kortRepo;
 
-        public KortControllerBase(IShortUrlRepository kortRepository)
+        protected KortControllerBase(IModifiedUrlRepository kortRepository)
         {
             _kortRepo = kortRepository ?? throw new ArgumentNullException(nameof(kortRepository));
         }
 
-        protected IShortUrlRepository GetShortenedUrlRepository()
+        protected IModifiedUrlRepository GetShortenedUrlRepository()
         {
             _kortRepo.SetContext();
             return _kortRepo;

@@ -1,6 +1,5 @@
 ﻿using Lekker.Kort.Repository.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,11 +29,11 @@ namespace Lekker.Kort.Repository.Context
             }
         }
 
-        internal async Task<ShortenedUrl> AddShortUrlAsync(string url, CancellationToken cancellationToken)
+        internal async Task<ShortenedUrl> AddShortUrlAsync(string id, string url, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var shortenedUrl = new ShortenedUrl(Guid.NewGuid().ToString(), url);
+            var shortenedUrl = new ShortenedUrl(id, url);
 
             await ShortenedUrls.AddAsync(shortenedUrl, cancellationToken).ConfigureAwait(false);
             await SaveChangesAsync(cancellationToken).ConfigureAwait(false);
@@ -59,6 +58,16 @@ namespace Lekker.Kort.Repository.Context
                 });
             }
         }
+
+        internal async Task<int> GetLastIndex(CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            return await ShortenedUrls
+                                .CountAsync()
+                                .ConfigureAwait(false);
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema(DbConstants.SchemaName);

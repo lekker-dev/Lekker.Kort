@@ -2,7 +2,7 @@
 
 namespace Lekker.Kort.Interface
 {
-    public interface IShortUrlContextFactory
+    public interface IModifiedUrlContextFactory
     {
         DbContext CreateDbContext();
     }

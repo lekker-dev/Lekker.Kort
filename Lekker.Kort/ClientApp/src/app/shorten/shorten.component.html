@@ -5,15 +5,23 @@
     <mat-form-field appearance="fill" class="shorten-input" color="accent">
       <mat-label>URL to shorten</mat-label>
       <input matInput #inputUrl />
-
-      <button mat-raised-button color="primary" class="shorten-button" (click)="getShortUrl(inputUrl.value)">Shorten</button>
     </mat-form-field>
 
     <mat-divider></mat-divider>
 
-    <mat-form-field appearance="fill" class="shorten-input" color="accent" *ngIf="showShortened">
+    <table>
+      <tr>
+        <td><button mat-raised-button color="primary" class="shorten-button" (click)="getLekkerUrl(inputUrl.value)">Lekkerder</button></td>
+        <td><button mat-raised-button color="accent" class="shorten-button" (click)="getShortUrl(inputUrl.value)">Shorter</button></td>
+      </tr>
+    </table>
+    
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field appearance="fill" class="shorten-input" color="accent" *ngIf="showModified">
       <mat-label>Short URL</mat-label>
-      <input matInput type="text" #outputBox aria-live="polite" value="{{ shortenedUrl }}" readonly />
+      <input matInput type="text" #outputBox aria-live="polite" value="{{ modifiedUrl }}" readonly />
       <button mat-icon-button matSuffix [attr.aria-label]="'Copy URL to clipboard'" [ngxClipboard]="outputBox" [attr.aria-pressed]="hide">
         <mat-icon svgIcon="copy"></mat-icon>
       </button>
