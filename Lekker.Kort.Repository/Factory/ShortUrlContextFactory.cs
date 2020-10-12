@@ -6,7 +6,7 @@ using System;
 
 namespace Lekker.Kort.Repository.Factory
 {
-    public class ShortUrlContextFactory : IShortUrlContextFactory
+    public class ShortUrlContextFactory : IModifiedUrlContextFactory
     {
         private readonly string _connectionString;
         private bool _migrationsRan;

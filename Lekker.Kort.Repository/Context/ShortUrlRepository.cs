@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace Lekker.Kort.Repository.Context
 {
-    public class ShortUrlRepository : IShortUrlRepository
+    public class ShortUrlRepository : IModifiedUrlRepository
     {
         protected ShortUrlContext _kortContext;
 
-        private readonly IShortUrlContextFactory _contextFactory;
+        private readonly IModifiedUrlContextFactory _contextFactory;
 
-        public ShortUrlRepository(IShortUrlContextFactory contextFactory)
+        public ShortUrlRepository(IModifiedUrlContextFactory contextFactory)
         {
             _contextFactory = contextFactory;
         }
@@ -31,10 +31,10 @@ namespace Lekker.Kort.Repository.Context
                 _kortContext = (ShortUrlContext)_contextFactory.CreateDbContext();
         }
 
-        public async Task<ShortUrlResponseDto> AddShortenedUrl(string uri, CancellationToken cancellationToken)
+        public async Task<ModifiedUrlResponse> AddShortenedUrl(string id, string uri, CancellationToken cancellationToken)
         {
-            var url = await _kortContext.AddShortUrlAsync(uri, cancellationToken).ConfigureAwait(false);
-            return new ShortUrlResponseDto()
+            var url = await _kortContext.AddShortUrlAsync(id, uri, cancellationToken).ConfigureAwait(false);
+            return new ModifiedUrlResponse()
             {
                 ShortUrl = url.Key
             };
@@ -50,6 +50,12 @@ namespace Lekker.Kort.Repository.Context
             {
                 OriginalUrl = url.Url
             };
+        }
+
+        public async Task<int> GetLastIndex(CancellationToken cancellationToken)
+        {
+            return await _kortContext.GetLastIndex(cancellationToken)
+                                     .ConfigureAwait(false);
         }
     }
 }
