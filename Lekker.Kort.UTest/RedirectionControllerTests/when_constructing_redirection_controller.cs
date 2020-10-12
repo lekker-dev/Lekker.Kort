@@ -4,15 +4,14 @@ using Moq;
 using NUnit.Framework;
 using System;
 
-namespace Lekker.Kort.UTest.using_redirection_controller
+namespace Lekker.Kort.UTest.RedirectionControllerTests
 {
-    public class when_constructing
+    public class when_constructing_redirection_controller
     {
-
         [Test]
         public void with_a_valid_repo()
         {
-            var repo = new Mock<IShortUrlRepository>().Object;
+            var repo = new Mock<IModifiedUrlRepository>().Object;
 
             var controller = new RedirectionController(repo);
 

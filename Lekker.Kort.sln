@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lekker.Kort", "Lekker.Kort\Lekker.Kort.csproj", "{9D7962C7-B73D-4B25-AC78-697060BE97E0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D3EE864E-43B3-417D-809D-F0FD014F319A}"
+	ProjectSection(SolutionItems) = preProject
+		CodeCoverage.runsettings = CodeCoverage.runsettings
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lekker.Kort.UTest", "Lekker.Kort.UTest\Lekker.Kort.UTest.csproj", "{E5AB188E-33DC-45A6-83DC-ADC0E94249A2}"
 EndProject

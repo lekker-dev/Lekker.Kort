@@ -1,5 +1,6 @@
 ﻿using Lekker.Kort.Interface;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,8 +15,8 @@ namespace Lekker.Kort.Services
 
         public IndexService(ILogger<IndexService> logger, IModifiedUrlRepository shortUrlRepository)
         {
-            _logger = logger;
-            _shortUrlRepository = shortUrlRepository;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _shortUrlRepository = shortUrlRepository ?? throw new ArgumentNullException(nameof(shortUrlRepository));
         }
 
         public async Task<int> GetNextIndex(CancellationToken cancellationToken)

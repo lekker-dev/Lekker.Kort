@@ -24,6 +24,7 @@
                 <Function>.*set_.*</Function>
                 <Function>Lekker.Kort.Program\..*</Function>
                 <Function>Lekker.Kort.Startup\..*</Function>
+                <Function>Lekker.Kort.Pages\..*</Function>
                 <Function>.*c__DisplayClass.*</Function>
               </Exclude>
             </Functions>

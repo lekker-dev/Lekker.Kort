@@ -16,7 +16,7 @@ namespace Lekker.Kort.Controllers
 
         protected ModifiedUrlControllerBase(IModifiedUrlRepository kortRepository, IIdService idService) : base(kortRepository)
         {
-            _idService = idService;
+            _idService = idService ?? throw new ArgumentNullException(nameof(idService));
         }
 
         [HttpPost]

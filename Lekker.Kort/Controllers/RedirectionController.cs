@@ -16,7 +16,7 @@ namespace Lekker.Kort.Controllers
         }
 
         [HttpGet("{modifiedUrl}")]
-        public async Task<ActionResult> RedirectTo([Required, FromRoute] string modifiedUrl, CancellationToken cancellationToken = default)
+        public async Task<ActionResult> RedirectoToOriginalUrl([Required, FromRoute] string modifiedUrl, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(modifiedUrl))
             {
@@ -26,7 +26,7 @@ namespace Lekker.Kort.Controllers
             try
             {
                 var originalUrl = await GetShortenedUrlRepository()
-                                        .GetOriginalUrl(shortUrl, cancellationToken)
+                                        .GetOriginalUrl(modifiedUrl, cancellationToken)
                                         .ConfigureAwait(false);
 
                 return Redirect(originalUrl.OriginalUrl);

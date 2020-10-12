@@ -8,15 +8,14 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Lekker.Kort.UTest.using_redirection_controller
+namespace Lekker.Kort.UTest.RedirectionControllerTests
 {
     public class when_getting_a_redirection
     {
-
         [Test]
         public async Task with_a_valid_url()
         {
-            var repo = new Mock<IShortUrlRepository>();
+            var repo = new Mock<IModifiedUrlRepository>();
             var response = new OriginalUrlResponseDto() { OriginalUrl = $"http://{Guid.NewGuid()}" };
             repo.Setup(r => r.GetOriginalUrl(It.IsAny<string>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(response);
@@ -34,8 +33,8 @@ namespace Lekker.Kort.UTest.using_redirection_controller
         [Test]
         public async Task with_an_invalid_url()
         {
-            var repo = new Mock<IShortUrlRepository>();
-           
+            var repo = new Mock<IModifiedUrlRepository>();
+
             repo.Setup(r => r.GetOriginalUrl(It.IsAny<string>(), It.IsAny<CancellationToken>()))
                 .ThrowsAsync(new InvalidOperationException());
 
@@ -52,7 +51,7 @@ namespace Lekker.Kort.UTest.using_redirection_controller
         [Test]
         public async Task with_a_blank_url()
         {
-            var repo = new Mock<IShortUrlRepository>();
+            var repo = new Mock<IModifiedUrlRepository>();
             var controller = new RedirectionController(repo.Object);
 
             var result = await controller
