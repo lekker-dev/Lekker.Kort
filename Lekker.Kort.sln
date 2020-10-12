@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lekker.Kort.Repository", "L
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lekker.Kort.Repository.UTest", "Lekker.Kort.Repository.UTest\Lekker.Kort.Repository.UTest.csproj", "{CDA0E379-9850-442E-BD04-9031B9B65C00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lekker.Kort.Interface", "Lekker.Kort.Interface\Lekker.Kort.Interface.csproj", "{DE0B534F-1E24-4702-B3CA-6DE87EEA54DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lekker.Kort.Interface", "Lekker.Kort.Interface\Lekker.Kort.Interface.csproj", "{DE0B534F-1E24-4702-B3CA-6DE87EEA54DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{62CAAE46-9577-4416-9F73-C2D6F0179BBE}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
