@@ -1,6 +1,7 @@
 using Lekker.Kort.Interface;
 using Lekker.Kort.Repository.Context;
 using Lekker.Kort.Repository.Factory;
+using Lekker.Kort.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -71,19 +72,22 @@ namespace Lekker.Kort
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-
-          
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<IShortUrlContextFactory, ShortUrlContextFactory>();
-            services.AddTransient<IShortUrlRepository, ShortUrlRepository>();
 
             services.AddSingleton(Configuration);
             services.AddSingleton<ILoggerFactory, SerilogLoggerFactory>();
+
+            services.AddSingleton<IIndexService, IndexService>();
+            services.AddTransient<UniqueIdService, UniqueIdService>();
+            services.AddTransient<LekkerIdService, LekkerIdService>();
+
+            services.AddSingleton<IModifiedUrlContextFactory, ShortUrlContextFactory>();
+            services.AddTransient<IModifiedUrlRepository, ShortUrlRepository>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

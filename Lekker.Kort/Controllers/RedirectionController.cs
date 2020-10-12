@@ -11,14 +11,14 @@ namespace Lekker.Kort.Controllers
     [Route("r")]
     public class RedirectionController : KortControllerBase
     {
-        public RedirectionController(IShortUrlRepository kortRepository) : base(kortRepository)
+        public RedirectionController(IModifiedUrlRepository kortRepository) : base(kortRepository)
         {
         }
 
-        [HttpGet("{shortUrl}")]
-        public async Task<ActionResult> RedirectoToOriginalUrl([Required, FromRoute] string shortUrl, CancellationToken cancellationToken = default)
+        [HttpGet("{modifiedUrl}")]
+        public async Task<ActionResult> RedirectTo([Required, FromRoute] string modifiedUrl, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(shortUrl))
+            if (string.IsNullOrWhiteSpace(modifiedUrl))
             {
                 return BadRequest("Invalid URL");
             }

@@ -9,9 +9,9 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./shorten.component.css']
 })
 export class ShortenComponent {
-
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     this.shortenEndpoint = baseUrl + "ShortUrl";
+    this.lekkerEndpoint = baseUrl + "LekkerUrl";
     this.redirectionEndpoint = baseUrl + "r/";
     this.http = http;
 
@@ -22,19 +22,26 @@ export class ShortenComponent {
 
   private redirectionEndpoint: string;
   private shortenEndpoint: string;
+  private lekkerEndpoint: string;
   private http: HttpClient;
-  public shortenedUrl: string;
-  public showShortened: boolean;
+
+  public modifiedUrl: string;
+  public showModified: boolean;
 
   public getShortUrl(url: string) {
     this.http.post<ShortUrl>(this.shortenEndpoint, { url: url }).subscribe(result => {
-      this.shortenedUrl = this.redirectionEndpoint + result.shortUrl;
-      this.showShortened = true;
+      this.modifiedUrl = this.redirectionEndpoint + result.shortUrl;
+      this.showModified = true;
     }, error => console.error(error));
+  }
 
+  public getLekkerUrl(url: string) {
+    this.http.post<ShortUrl>(this.lekkerEndpoint, { url: url }).subscribe(result => {
+      this.modifiedUrl = this.redirectionEndpoint + result.shortUrl;
+      this.showModified = true;
+    }, error => console.error(error));
   }
 }
-
 
 interface ShortUrl {
   shortUrl: string;

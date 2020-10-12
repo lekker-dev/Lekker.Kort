@@ -5,7 +5,7 @@ namespace Lekker.Kort.Models
 {
     public static class ResponseExtensions
     {
-        public static ShortUrlResponse ToShortUrlResponse(this ShortUrlResponseDto dto)
+        public static ShortUrlResponse ToShortUrlResponse(this ModifiedUrlResponse dto)
         {
             return new ShortUrlResponse()
             {
