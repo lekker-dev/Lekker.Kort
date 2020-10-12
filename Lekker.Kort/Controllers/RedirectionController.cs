@@ -25,7 +25,7 @@ namespace Lekker.Kort.Controllers
 
             try
             {
-                var originalUrl = await GetShortenedUrlRepository()
+                var originalUrl = await GetRepository()
                                         .GetOriginalUrl(modifiedUrl, cancellationToken)
                                         .ConfigureAwait(false);
 

@@ -54,7 +54,6 @@ namespace Lekker.Kort.Services
         private async Task SetIndexToLastValueInDatabase(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Initialize Index from Database");
-            _shortUrlRepository.SetContext();
 
             _index = await _shortUrlRepository
                                   .GetLastIndex(cancellationToken)

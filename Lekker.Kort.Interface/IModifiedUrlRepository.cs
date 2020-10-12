@@ -12,8 +12,5 @@ namespace Lekker.Kort.Interface
 
         Task<OriginalUrlResponseDto> GetOriginalUrl(string modfiedUrl, CancellationToken cancellationToken);
 
-        void ReleaseContext();
-
-        void SetContext();
     }
 }
