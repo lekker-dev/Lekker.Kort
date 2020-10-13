@@ -1,0 +1,27 @@
+.child
+{
+  padding-top: 15%;
+}
+
+.title-label{
+  text-align: center;
+}
+
+.shorten-input {
+  width: 100% !important;
+}
+
+.shorten-button {
+  width: 100% !important;
+  height: 55px !important;
+  padding: 5px !important
+}
+
+.shortened-url {
+  padding-top: 25px;
+  text-align: center;
+}
+
+.button-table {
+  width: 100%
+}
