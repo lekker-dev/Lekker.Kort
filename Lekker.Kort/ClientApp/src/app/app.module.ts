@@ -17,11 +17,13 @@ import { AppComponent } from './app.component';
 import { ShortenComponent } from './shorten/shorten.component';
 
 import { ClipboardModule } from 'ngx-clipboard';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShortenComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,6 +31,7 @@ import { ClipboardModule } from 'ngx-clipboard';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: ShortenComponent, pathMatch: 'full' },
+      { path: 'error', component: ErrorComponent, pathMatch: 'full' },
     ]),
     BrowserAnimationsModule,
     MatButtonModule,
