@@ -16,7 +16,7 @@ namespace Lekker.Kort.Controllers
 
         protected ModifiedUrlControllerBase(IModifiedUrlRepository kortRepository, IIdService idService) : base(kortRepository)
         {
-            _idService = idService;
+            _idService = idService ?? throw new ArgumentNullException(nameof(idService));
         }
 
         [HttpPost]
@@ -30,7 +30,7 @@ namespace Lekker.Kort.Controllers
             var uniqueKey = await _idService.GetUniqueId(cancellationToken)
                                             .ConfigureAwait(false);
 
-            var shortUrl = await GetShortenedUrlRepository()
+            var shortUrl = await GetRepository()
                                     .AddShortenedUrl(uniqueKey, Uri.UnescapeDataString(url.Url), cancellationToken)
                                     .ConfigureAwait(false);
 
@@ -45,7 +45,7 @@ namespace Lekker.Kort.Controllers
                 return BadRequest("Invalid URL");
             }
 
-            var originalUrl = await GetShortenedUrlRepository()
+            var originalUrl = await GetRepository()
                                         .GetOriginalUrl(modifiedUrl, cancellationToken)
                                         .ConfigureAwait(false);
 

@@ -1,5 +1,6 @@
 ﻿using Lekker.Kort.Interface;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,8 +13,8 @@ namespace Lekker.Kort.Services
 
         public UniqueIdService(ILogger<UniqueIdService> logger, IIndexService indexService)
         {
-            _logger = logger;
-            _indexService = indexService;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _indexService = indexService ?? throw new ArgumentNullException(nameof(indexService));
         }
 
         public async Task<string> GetUniqueId(CancellationToken cancellationToken)

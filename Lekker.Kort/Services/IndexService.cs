@@ -1,5 +1,6 @@
 ﻿using Lekker.Kort.Interface;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,8 +15,8 @@ namespace Lekker.Kort.Services
 
         public IndexService(ILogger<IndexService> logger, IModifiedUrlRepository shortUrlRepository)
         {
-            _logger = logger;
-            _shortUrlRepository = shortUrlRepository;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _shortUrlRepository = shortUrlRepository ?? throw new ArgumentNullException(nameof(shortUrlRepository));
         }
 
         public async Task<int> GetNextIndex(CancellationToken cancellationToken)
@@ -53,7 +54,6 @@ namespace Lekker.Kort.Services
         private async Task SetIndexToLastValueInDatabase(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Initialize Index from Database");
-            _shortUrlRepository.SetContext();
 
             _index = await _shortUrlRepository
                                   .GetLastIndex(cancellationToken)

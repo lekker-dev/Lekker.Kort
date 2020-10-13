@@ -11,17 +11,19 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { ShortenComponent } from './shorten/shorten.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ClipboardModule } from 'ngx-clipboard';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShortenComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,6 +31,7 @@ import { ClipboardModule } from 'ngx-clipboard';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: ShortenComponent, pathMatch: 'full' },
+      { path: 'error', component: ErrorComponent, pathMatch: 'full' },
     ]),
     BrowserAnimationsModule,
     MatButtonModule,

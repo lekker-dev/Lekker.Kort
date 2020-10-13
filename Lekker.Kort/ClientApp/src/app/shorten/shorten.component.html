@@ -1,6 +1,6 @@
 <div class="shorten-container">
   <div class="child">
-    <h1 class="title-label" color="accent">Maak hom Lekker:</h1>
+    <h1 class="title-label" color="accent">Maak hom Lekker</h1>
 
     <mat-form-field appearance="fill" class="shorten-input" color="accent">
       <mat-label>URL to shorten</mat-label>
@@ -19,7 +19,7 @@
 
     <mat-divider></mat-divider>
 
-    <mat-form-field appearance="fill" class="shorten-input" color="accent" *ngIf="showModified">
+    <mat-form-field appearance="fill" class="shorten-input" color="accent" *ngIf="modifiedUrl">
       <mat-label>Short URL</mat-label>
       <input matInput type="text" #outputBox aria-live="polite" value="{{ modifiedUrl }}" readonly />
       <button mat-icon-button matSuffix [attr.aria-label]="'Copy URL to clipboard'" [ngxClipboard]="outputBox" [attr.aria-pressed]="hide">
