@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'error',
@@ -7,13 +7,6 @@ import { Component, Inject } from '@angular/core';
 })
 
 export class ErrorComponent {
-  constructor(@Inject('BASE_URL') baseUrl: string) {
-   
-  }
-
-  public goHome() {
-    
-  }
 
 }
 
