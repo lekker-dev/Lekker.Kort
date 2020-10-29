@@ -1,5 +1,6 @@
 ﻿using Lekker.Kort.Repository.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,6 +10,11 @@ namespace Lekker.Kort.Repository.Context
     public class ShortUrlContext : DbContext
     {
         private readonly string _connectionString;
+
+        public ShortUrlContext()
+        {
+            _connectionString = "Data Source=lekker.db";
+        }
 
         public ShortUrlContext(string connectionString)
         {
@@ -20,6 +26,7 @@ namespace Lekker.Kort.Repository.Context
         }
 
         public DbSet<ShortenedUrl> ShortenedUrls { get; set; }
+        public DbSet<Hit> Hits { get; set; }
 
         public void Migrate()
         {
@@ -41,11 +48,23 @@ namespace Lekker.Kort.Repository.Context
             return shortenedUrl;
         }
 
-        internal async Task<ShortenedUrl> GetOriginalUrl(string key, CancellationToken cancellationToken)
+        internal async Task<ShortenedUrl> ResolveUrl(string key, string userId, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            return await ShortenedUrls.FirstAsync(s => s.Key == key, cancellationToken).ConfigureAwait(false);
+            var url = await ShortenedUrls.Include(s => s.Hits)
+                .FirstAsync(s => s.Key == key, cancellationToken).ConfigureAwait(false);
+
+           url.Hits.Add(new Hit(Guid.NewGuid().ToString(), userId));
+
+            await SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+
+            return url;
+        }
+
+        internal async Task<ShortenedUrl> GetUrl(string key, CancellationToken cancellationToken)
+        {
+            return await ShortenedUrls.Include(s => s.Hits).FirstAsync(s => s.Key == key, cancellationToken).ConfigureAwait(false);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

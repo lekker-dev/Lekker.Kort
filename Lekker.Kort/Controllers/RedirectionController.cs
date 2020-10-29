@@ -16,7 +16,7 @@ namespace Lekker.Kort.Controllers
         }
 
         [HttpGet("{modifiedUrl}")]
-        public async Task<ActionResult> RedirectoToOriginalUrl([Required, FromRoute] string modifiedUrl, CancellationToken cancellationToken = default)
+        public async Task<ActionResult> RedirectoToOriginalUrl([Required, FromRoute] string modifiedUrl, [FromQuery] string uid, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(modifiedUrl))
             {
@@ -25,8 +25,12 @@ namespace Lekker.Kort.Controllers
 
             try
             {
+                if (string.IsNullOrEmpty(uid))
+                {
+                    uid = "Unknown";
+                }
                 var originalUrl = await GetRepository()
-                                        .GetOriginalUrl(modifiedUrl, cancellationToken)
+                                        .ResolveUrl(modifiedUrl, uid, cancellationToken)
                                         .ConfigureAwait(false);
 
                 return Redirect(originalUrl.OriginalUrl);

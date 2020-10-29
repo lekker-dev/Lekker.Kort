@@ -34,11 +34,12 @@ namespace Lekker.Kort.Controllers
                                     .AddShortenedUrl(uniqueKey, Uri.UnescapeDataString(url.Url), cancellationToken)
                                     .ConfigureAwait(false);
 
+            shortUrl.ShortUrl += "?uid=Unknown";
             return Ok(shortUrl.ToShortUrlResponse());
         }
 
         [HttpGet("{modifiedUrl}")]
-        public async Task<ActionResult<OriginalUrlResponse>> GetOriginalUrl([Required, FromRoute] string modifiedUrl, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<UrlDetailResponse>> GetOriginalUrl([Required, FromRoute] string modifiedUrl, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(modifiedUrl))
             {
@@ -46,10 +47,10 @@ namespace Lekker.Kort.Controllers
             }
 
             var originalUrl = await GetRepository()
-                                        .GetOriginalUrl(modifiedUrl, cancellationToken)
+                                        .GetUrlInfo(Uri.UnescapeDataString(modifiedUrl), cancellationToken)
                                         .ConfigureAwait(false);
 
-            return Ok(originalUrl.ToOriginalUrlResponse());
+            return Ok(originalUrl.ToDetailUrlResponse());
         }
     }
 }

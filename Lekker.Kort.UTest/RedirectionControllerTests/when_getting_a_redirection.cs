@@ -17,7 +17,7 @@ namespace Lekker.Kort.UTest.RedirectionControllerTests
         {
             var repo = new Mock<IModifiedUrlRepository>();
             var response = new OriginalUrlResponseDto() { OriginalUrl = $"http://{Guid.NewGuid()}" };
-            repo.Setup(r => r.GetOriginalUrl(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+            repo.Setup(r => r.ResolveUrl(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(response);
 
             var controller = new RedirectionController(repo.Object);
@@ -35,7 +35,7 @@ namespace Lekker.Kort.UTest.RedirectionControllerTests
         {
             var repo = new Mock<IModifiedUrlRepository>();
 
-            repo.Setup(r => r.GetOriginalUrl(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+            repo.Setup(r => r.ResolveUrl(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
                 .ThrowsAsync(new InvalidOperationException());
 
             var controller = new RedirectionController(repo.Object);

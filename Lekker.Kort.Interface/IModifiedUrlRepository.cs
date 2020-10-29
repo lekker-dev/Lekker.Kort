@@ -10,7 +10,9 @@ namespace Lekker.Kort.Interface
 
         Task<int> GetLastIndex(CancellationToken cancellationToken);
 
-        Task<OriginalUrlResponseDto> GetOriginalUrl(string modfiedUrl, CancellationToken cancellationToken);
+        Task<OriginalUrlResponseDto> ResolveUrl(string shortUrl, string userId, CancellationToken cancellationToken);
+
+        Task<UrlDetailResponseDto> GetUrlInfo(string shortUrl, CancellationToken cancellationToken);
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Lekker.Kort.Interface;
 using Lekker.Kort.Interface.DTO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -37,10 +38,23 @@ namespace Lekker.Kort.Repository.Context
                             .ConfigureAwait(false);
         }
 
-        public async Task<OriginalUrlResponseDto> GetOriginalUrl(string shortUrl, CancellationToken cancellationToken)
+        public async Task<UrlDetailResponseDto> GetUrlInfo(string shortUrl, CancellationToken cancellationToken)
+        {
+            var url =  await GetContext()
+                              .GetUrl(shortUrl, cancellationToken)
+                              .ConfigureAwait(false);
+
+            return new UrlDetailResponseDto()
+            {
+                OriginalUrl = url.Url,
+                Hits = url.Hits.Select(h => h.Name).ToList()
+            };
+        }
+
+        public async Task<OriginalUrlResponseDto> ResolveUrl(string shortUrl, string userId, CancellationToken cancellationToken)
         {
             var url = await GetContext()
-                                .GetOriginalUrl(shortUrl, cancellationToken)
+                                .ResolveUrl(shortUrl, userId, cancellationToken)
                                 .ConfigureAwait(false);
 
             return new OriginalUrlResponseDto()

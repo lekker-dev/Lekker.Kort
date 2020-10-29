@@ -31,7 +31,7 @@ namespace Lekker.Kort.UTest.UrlModifierControllerTests
         {
             var repo = new Mock<IModifiedUrlRepository>();
             var response = new OriginalUrlResponseDto() { OriginalUrl = Guid.NewGuid().ToString() };
-            repo.Setup(rep => rep.GetOriginalUrl(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+            repo.Setup(rep => rep.ResolveUrl(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(response);
 
             var controller = new TestModifiedUrlController(repo.Object, new Mock<IIdService>().Object);

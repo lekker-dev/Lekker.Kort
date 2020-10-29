@@ -20,5 +20,15 @@ namespace Lekker.Kort.Models
                 OriginalUrl = dto.OriginalUrl
             };
         }
+
+        public static UrlDetailResponse ToDetailUrlResponse(this UrlDetailResponseDto dto)
+        {
+            return new UrlDetailResponse()
+            {
+                OriginalUrl = dto.OriginalUrl,
+                Hits = dto.Hits.ToArray(),
+                HitCount = dto.Hits.Count
+            };
+        }
     }
 }

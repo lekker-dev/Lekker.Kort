@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Lekker.Kort.Repository.Models
 {
@@ -19,5 +20,7 @@ namespace Lekker.Kort.Repository.Models
 
         [Required]
         public string Url { get; set; }
+
+        public List<Hit> Hits { get; set; }
     }
 }
